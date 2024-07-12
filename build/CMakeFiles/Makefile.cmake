@@ -36,6 +36,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/Cellar/cmake/3.30.0/share/cmake/Modules/Platform/UnixPaths.cmake"
   "/opt/homebrew/lib/cmake/SDL2/sdl2-config-version.cmake"
   "/opt/homebrew/lib/cmake/SDL2/sdl2-config.cmake"
+  "/opt/homebrew/lib/cmake/SDL2_image/sdl2_image-config-version.cmake"
+  "/opt/homebrew/lib/cmake/SDL2_image/sdl2_image-config.cmake"
   "/opt/homebrew/lib/cmake/SDL2_ttf/sdl2_ttf-config-version.cmake"
   "/opt/homebrew/lib/cmake/SDL2_ttf/sdl2_ttf-config.cmake"
   )

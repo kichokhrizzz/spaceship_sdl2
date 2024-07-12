@@ -1,10 +1,41 @@
 #include "player.h"
 #include <cmath>
+#include <iostream> // Para imprimir errores
 
-Player::Player(int x, int y, int size, SDL_Color color)
-    // 4th Steep Score
-    : posX(x), posY(y), velX(0), velY(0), size(size), color(color), score(0)
+// Constructor actualizado para incluir renderer y texturePath
+Player::Player(int x, int y, int size, SDL_Color color, SDL_Renderer* renderer, const std::string& texturePath)
+    : posX(x), posY(y), velX(0), velY(0), size(size), color(color), score(0), renderer(renderer), texture(nullptr)
 {
+    texture = loadTexture(texturePath);
+}
+
+// Destructor añadido para liberar la textura
+Player::~Player()
+{
+    if (texture != nullptr)
+    {
+        SDL_DestroyTexture(texture);
+    }
+}
+
+// Nueva función para cargar la textura desde un archivo PNG
+SDL_Texture* Player::loadTexture(const std::string& path)
+{
+    SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+    if (loadedSurface == nullptr)
+    {
+        std::cerr << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << std::endl;
+        return nullptr;
+    }
+
+    SDL_Texture* newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+    if (newTexture == nullptr)
+    {
+        std::cerr << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << std::endl;
+    }
+
+    SDL_FreeSurface(loadedSurface);
+    return newTexture;
 }
 
 void Player::handleEvent(SDL_Event &e)
@@ -127,9 +158,16 @@ void Player::handleEnemies(SDL_Renderer *renderer)
 
 void Player::render(SDL_Renderer *renderer, TTF_Font *font, SDL_Color textColor)
 {
-    SDL_Rect fillRect = {posX, posY, size, size};
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderFillRect(renderer, &fillRect);
+    SDL_Rect renderQuad = {posX, posY, size, size};
+    if (texture != nullptr)
+    {
+        SDL_RenderCopy(renderer, texture, nullptr, &renderQuad);
+    }
+    else
+    {
+        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+        SDL_RenderFillRect(renderer, &renderQuad);
+    }
 
     // 2nd Step Shoot
     handleProjectiles(renderer);
@@ -138,15 +176,15 @@ void Player::render(SDL_Renderer *renderer, TTF_Font *font, SDL_Color textColor)
     handleEnemies(renderer);
 
     // 4th Step Score
-     // Renderizar puntaje
+    // Renderizar puntaje
     std::string scoreText = "Score: " + std::to_string(score);
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, scoreText.c_str(), textColor);
     SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
     int textWidth = textSurface->w;
     int textHeight = textSurface->h;
     SDL_FreeSurface(textSurface);
-    SDL_Rect renderQuad = {1980 - textWidth - 10, 10, textWidth, textHeight};
-    SDL_RenderCopy(renderer, textTexture, NULL, &renderQuad);
+    SDL_Rect renderQuadText = {1980 - textWidth - 10, 10, textWidth, textHeight};
+    SDL_RenderCopy(renderer, textTexture, NULL, &renderQuadText);
     SDL_DestroyTexture(textTexture);
 }
 

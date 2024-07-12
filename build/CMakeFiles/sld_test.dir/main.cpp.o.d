@@ -338,9 +338,12 @@ CMakeFiles/sld_test.dir/main.cpp.o: \
   /opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2/SDL_misc.h \
-  /opt/homebrew/include/SDL2/SDL_ttf.h /opt/homebrew/include/SDL2/SDL.h \
+  /opt/homebrew/include/SDL2/SDL_image.h \
+  /opt/homebrew/include/SDL2/SDL.h \
+  /opt/homebrew/include/SDL2/SDL_version.h \
   /opt/homebrew/include/SDL2/begin_code.h \
   /opt/homebrew/include/SDL2/close_code.h \
+  /opt/homebrew/include/SDL2/SDL_ttf.h \
   /Users/jhoselbadillocortes/Documents/sdl_test/player.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__algorithm/copy.h \

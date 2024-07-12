@@ -27,19 +27,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 16,
+				"line" : 20,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 23,
+				"line" : 27,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 26,
+				"line" : 34,
 				"parent" : 0
 			},
 			{
@@ -51,7 +51,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 19,
+				"line" : 23,
 				"parent" : 0
 			}
 		]
@@ -126,6 +126,11 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "/opt/homebrew/lib/libSDL2_ttf.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/homebrew/lib/libSDL2_image.dylib",
 				"role" : "libraries"
 			}
 		],

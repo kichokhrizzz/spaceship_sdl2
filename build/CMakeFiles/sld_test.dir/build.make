@@ -142,6 +142,7 @@ sld_test: CMakeFiles/sld_test.dir/enemy.cpp.o
 sld_test: CMakeFiles/sld_test.dir/build.make
 sld_test: /opt/homebrew/lib/libSDL2.dylib
 sld_test: /opt/homebrew/lib/libSDL2_ttf.dylib
+sld_test: /opt/homebrew/lib/libSDL2_image.dylib
 sld_test: CMakeFiles/sld_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jhoselbadillocortes/Documents/sdl_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable sld_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sld_test.dir/link.txt --verbose=$(VERBOSE)
