@@ -1,11 +1,12 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>  // Añadido para manejar imágenes PNG
+#include <SDL2/SDL_image.h> // Añadido para manejar imágenes PNG
 #include <SDL2/SDL_ttf.h>
 #include "player.h"
 #include "projectile.h"
 #include "enemy.h"
 #include <cstdlib>
 #include <ctime>
+#include "constanst.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +16,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Inicializa SDL_image
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
     {
         SDL_Log("Unable to initialize SDL_image: %s", IMG_GetError());
@@ -23,11 +23,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Inicializa SDL_ttf
     if (TTF_Init() == -1)
     {
         SDL_Log("Unable to initialize SDL_ttf: %s", TTF_GetError());
-        IMG_Quit();  // Debe cerrar SDL_image antes de SDL_Quit
+        IMG_Quit();
         SDL_Quit();
         return 1;
     }
@@ -36,14 +35,14 @@ int main(int argc, char *argv[])
         "Title",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        1980,
-        720,
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
         SDL_WINDOW_SHOWN);
 
     if (window == NULL)
     {
         SDL_Log("Unable to create window: %s", SDL_GetError());
-        TTF_Quit();  // Debe cerrar SDL_ttf antes de IMG_Quit
+        TTF_Quit();
         IMG_Quit();
         SDL_Quit();
         return 1;
@@ -60,7 +59,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Inicializa SDL_image
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
     {
         SDL_Log("Unable to initialize SDL_image: %s", IMG_GetError());
@@ -72,8 +70,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // 4th Step Score
-    TTF_Font *font = TTF_OpenFont("/Users/jhoselbadillocortes/Documents/sdl_test/bit.ttf", 28); // Cambiar la ruta de la fuente según sea necesario
+    TTF_Font *font = TTF_OpenFont("/Users/jhoselbadillocortes/Documents/sdl_test/bit.ttf", 28);
     if (font == NULL)
     {
         SDL_Log("Failed to load font: %s", TTF_GetError());
@@ -89,8 +86,9 @@ int main(int argc, char *argv[])
 
     srand(static_cast<unsigned>(time(0)));
 
-    // 4th Step Score
     Player player(100, 100, 32, {255, 0, 0, 255}, renderer, "/Users/jhoselbadillocortes/Documents/sdl_test/spachesip.png");
+
+    std::string enemyTexturePath = "/Users/jhoselbadillocortes/Documents/sdl_test/enemy.png";
 
     bool quit = false;
     SDL_Event e;
@@ -109,9 +107,9 @@ int main(int argc, char *argv[])
 
         player.move();
 
-        if (spawnTimer++ > 480) // Adjust spawn rate as needed
+        if (spawnTimer++ > 480)
         {
-            player.addEnemy();
+            player.addEnemy(renderer, enemyTexturePath);
             spawnTimer = 0;
         }
 
@@ -120,19 +118,17 @@ int main(int argc, char *argv[])
 
         player.render(renderer, font, textColor);
 
+        player.handleEnemies(renderer); // Asegurarse de que handleEnemies se llame aquí
+
         SDL_RenderPresent(renderer);
     }
 
-    // 4th Step
     TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
-    // Limpiar SDL_image
     IMG_Quit();
-    // Limpiar SDL_ttf
     TTF_Quit();
-    // Limpiar SDL
     SDL_Quit();
 
     return 0;

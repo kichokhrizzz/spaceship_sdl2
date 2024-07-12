@@ -1,9 +1,10 @@
 #include "player.h"
+#include "constanst.h"
 #include <cmath>
 #include <iostream> // Para imprimir errores
 
 // Constructor actualizado para incluir renderer y texturePath
-Player::Player(int x, int y, int size, SDL_Color color, SDL_Renderer* renderer, const std::string& texturePath)
+Player::Player(int x, int y, int size, SDL_Color color, SDL_Renderer *renderer, const std::string &texturePath)
     : posX(x), posY(y), velX(0), velY(0), size(size), color(color), score(0), renderer(renderer), texture(nullptr)
 {
     texture = loadTexture(texturePath);
@@ -19,16 +20,16 @@ Player::~Player()
 }
 
 // Nueva función para cargar la textura desde un archivo PNG
-SDL_Texture* Player::loadTexture(const std::string& path)
+SDL_Texture *Player::loadTexture(const std::string &path)
 {
-    SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+    SDL_Surface *loadedSurface = IMG_Load(path.c_str());
     if (loadedSurface == nullptr)
     {
         std::cerr << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << std::endl;
         return nullptr;
     }
 
-    SDL_Texture* newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+    SDL_Texture *newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     if (newTexture == nullptr)
     {
         std::cerr << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << std::endl;
@@ -93,18 +94,18 @@ void Player::move()
     {
         posX = 0;
     }
-    else if (posX + size > 1980)
+    else if (posX + size > SCREEN_WIDTH)
     {
-        posX = 1980 - size;
+        posX = SCREEN_WIDTH - size;
     }
 
     if (posY < 0)
     {
         posY = 0;
     }
-    else if (posY + size > 720)
+    else if (posY + size > SCREEN_HEIGHT)
     {
-        posY = 720 - size;
+        posY = SCREEN_HEIGHT - size;
     }
 }
 
@@ -117,10 +118,11 @@ void Player::shoot()
 }
 
 // 3rd Step Enemy
-void Player::addEnemy()
+void Player::addEnemy(SDL_Renderer *renderer, const std::string &texturePath)
 {
     SDL_Color green = {35, 101, 51, 255};
-    enemies.push_back(Enemy(rand() % 1980, 0, 20, green));
+    enemies.push_back(Enemy(rand() % SCREEN_WIDTH, 0, 32, green, renderer, texturePath));
+    std::cout << "Enemy added at position (" << enemies.back().getX() << ", " << enemies.back().getY() << ")" << std::endl;
 }
 
 void Player::handleEnemies(SDL_Renderer *renderer)
@@ -146,7 +148,8 @@ void Player::handleEnemies(SDL_Renderer *renderer)
 
         if (hit)
         {
-            it = enemies.erase(it);
+            std::cout << "Enemy at (" << it->getX() << ", " << it->getY() << ") destroyed" << std::endl;
+            it = enemies.erase(it); // Esto también llamará al destructor del enemigo, liberando la texturaØ
         }
         else
         {
@@ -183,7 +186,7 @@ void Player::render(SDL_Renderer *renderer, TTF_Font *font, SDL_Color textColor)
     int textWidth = textSurface->w;
     int textHeight = textSurface->h;
     SDL_FreeSurface(textSurface);
-    SDL_Rect renderQuadText = {1980 - textWidth - 10, 10, textWidth, textHeight};
+    SDL_Rect renderQuadText = {SCREEN_WIDTH - textWidth - 10, 10, textWidth, textHeight};
     SDL_RenderCopy(renderer, textTexture, NULL, &renderQuadText);
     SDL_DestroyTexture(textTexture);
 }
@@ -194,7 +197,7 @@ void Player::handleProjectiles(SDL_Renderer *renderer)
     for (auto it = projectiles.begin(); it != projectiles.end();)
     {
         it->move();
-        if (it->isOffScreen(720))
+        if (it->isOffScreen(SCREEN_HEIGHT))
         {
             it = projectiles.erase(it);
         }

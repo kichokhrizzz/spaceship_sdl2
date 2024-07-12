@@ -914,4 +914,5 @@ CMakeFiles/sld_test.dir/main.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__split_buffer \
   /Users/jhoselbadillocortes/Documents/sdl_test/projectile.h \
-  /Users/jhoselbadillocortes/Documents/sdl_test/enemy.h
+  /Users/jhoselbadillocortes/Documents/sdl_test/enemy.h \
+  /Users/jhoselbadillocortes/Documents/sdl_test/constanst.h
