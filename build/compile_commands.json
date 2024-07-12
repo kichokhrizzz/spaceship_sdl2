@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/Users/jhoselbadillocortes/Documents/sdl_test/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DSDL_MAIN_HANDLED -I/opt/homebrew/Cellar/sdl2/2.30.5/include -I/opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2 -I/opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -o CMakeFiles/sld_test.dir/main.cpp.o -c /Users/jhoselbadillocortes/Documents/sdl_test/main.cpp",
+  "file": "/Users/jhoselbadillocortes/Documents/sdl_test/main.cpp",
+  "output": "CMakeFiles/sld_test.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/jhoselbadillocortes/Documents/sdl_test/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DSDL_MAIN_HANDLED -I/opt/homebrew/Cellar/sdl2/2.30.5/include -I/opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2 -I/opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -o CMakeFiles/sld_test.dir/player.cpp.o -c /Users/jhoselbadillocortes/Documents/sdl_test/player.cpp",
+  "file": "/Users/jhoselbadillocortes/Documents/sdl_test/player.cpp",
+  "output": "CMakeFiles/sld_test.dir/player.cpp.o"
+},
+{
+  "directory": "/Users/jhoselbadillocortes/Documents/sdl_test/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DSDL_MAIN_HANDLED -I/opt/homebrew/Cellar/sdl2/2.30.5/include -I/opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2 -I/opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -o CMakeFiles/sld_test.dir/projectile.cpp.o -c /Users/jhoselbadillocortes/Documents/sdl_test/projectile.cpp",
+  "file": "/Users/jhoselbadillocortes/Documents/sdl_test/projectile.cpp",
+  "output": "CMakeFiles/sld_test.dir/projectile.cpp.o"
+},
+{
+  "directory": "/Users/jhoselbadillocortes/Documents/sdl_test/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DSDL_MAIN_HANDLED -I/opt/homebrew/Cellar/sdl2/2.30.5/include -I/opt/homebrew/Cellar/sdl2/2.30.5/include/SDL2 -I/opt/homebrew/include -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -o CMakeFiles/sld_test.dir/enemy.cpp.o -c /Users/jhoselbadillocortes/Documents/sdl_test/enemy.cpp",
+  "file": "/Users/jhoselbadillocortes/Documents/sdl_test/enemy.cpp",
+  "output": "CMakeFiles/sld_test.dir/enemy.cpp.o"
+}
+]
