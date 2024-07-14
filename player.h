@@ -32,6 +32,10 @@ public:
     // 4th Steep Score
     int getScore() const { return score; }
 
+
+    void checkCollisionWithEnemies(); // Nueva función para detectar colisiones
+    bool isGameOver() const { return gameOver; } // Nueva función para verificar el estado del juego
+
 private:
     int posX, posY;
     int velX, velY;
@@ -51,6 +55,8 @@ private:
     SDL_Renderer *renderer; // Nueva variable para el renderer
 
     SDL_Texture *loadTexture(const std::string &path); // Nueva función para cargar la textura
+
+    bool gameOver; // Nueva variable para manejar el estado del juego
 };
 
 #endif // PLAYER_H

@@ -15,6 +15,7 @@ public:
     // Añadir métodos getX y getY
     int getX() const { return posX; }
     int getY() const { return posY; }
+    int getSize() const { return size; } // Añadir este método
 
 private:
     int posX, posY;

@@ -1,12 +1,26 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h> // Añadido para manejar imágenes PNG
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "player.h"
 #include "projectile.h"
 #include "enemy.h"
+#include "constanst.h"
 #include <cstdlib>
 #include <ctime>
-#include "constanst.h"
+
+void showGameOver(SDL_Renderer* renderer, TTF_Font* font)
+{
+    SDL_Color textColor = {255, 0, 0, 255};
+    std::string gameOverText = "Game Over!";
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, gameOverText.c_str(), textColor);
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    int textWidth = textSurface->w;
+    int textHeight = textSurface->h;
+    SDL_FreeSurface(textSurface);
+    SDL_Rect renderQuad = {SCREEN_WIDTH / 2 - textWidth / 2, SCREEN_HEIGHT / 2 - textHeight / 2, textWidth, textHeight};
+    SDL_RenderCopy(renderer, textTexture, NULL, &renderQuad);
+    SDL_DestroyTexture(textTexture);
+}
 
 int main(int argc, char *argv[])
 {
@@ -118,9 +132,18 @@ int main(int argc, char *argv[])
 
         player.render(renderer, font, textColor);
 
-        player.handleEnemies(renderer); // Asegurarse de que handleEnemies se llame aquí
-
-        SDL_RenderPresent(renderer);
+        if (player.isGameOver())
+        {
+            showGameOver(renderer, font);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(3000); // Mostrar el mensaje de "Game Over" durante 3 segundos
+            quit = true;
+        }
+        else
+        {
+            player.handleEnemies(renderer);
+            SDL_RenderPresent(renderer);
+        }
     }
 
     TTF_CloseFont(font);

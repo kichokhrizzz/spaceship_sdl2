@@ -178,6 +178,8 @@ void Player::render(SDL_Renderer *renderer, TTF_Font *font, SDL_Color textColor)
     // 3rd Step Enemy
     handleEnemies(renderer);
 
+    checkCollisionWithEnemies();
+
     // 4th Step Score
     // Renderizar puntaje
     std::string scoreText = "Score: " + std::to_string(score);
@@ -205,6 +207,23 @@ void Player::handleProjectiles(SDL_Renderer *renderer)
         {
             it->render(renderer);
             ++it;
+        }
+    }
+}
+
+void Player::checkCollisionWithEnemies()
+{
+    for (const auto &enemy : enemies)
+    {
+        int deltaX = enemy.getX() - posX;
+        int deltaY = enemy.getY() - posY;
+        int distance = static_cast<int>(std::sqrt(deltaX * deltaX + deltaY * deltaY));
+
+        if (distance < (size / 8 + enemy.getSize() / 8))
+        {
+            gameOver = true;
+            std::cout << "Game Over! Player collided with an enemy at (" << enemy.getX() << ", " << enemy.getY() << ")" << std::endl;
+            break;
         }
     }
 }
